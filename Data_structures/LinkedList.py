@@ -34,23 +34,16 @@ class LinkedList:
             new_node.next = current_node.next
             current_node.next = new_node
 
-    def remove(self, value):
+    def remove(self):
         if self.head is None:
             raise ValueError("LinkedList is empty...")
-
-        if self.head.value == value:
-            self.head = self.head.next
+        if self.head.next is None:
+            self.head = None
         else:
             current_node = self.head
-            found = False
-            while current_node.next:
-                if current_node.next.value == value:
-                    current_node.next = current_node.next.next
-                    found = True
-                    break
+            while current_node.next and current_node.next.next:
                 current_node = current_node.next
-            if not found:
-                raise ValueError("Value not found in the LinkedList.")
+            current_node.next = None
 
     def view_elements(self):
         if self.head is None:
@@ -79,13 +72,7 @@ ll1.append(75)
 ll1.insert(0, 20)
 ll1.insert(5, 64)
 
-ll1.remove(20)
-ll1.remove(89)
-ll1.remove(6)
-
-try:
-    ll1.remove(6)
-except ValueError as e:
-    print(e)
+ll1.remove()
+ll1.remove()
 
 ll1.view_elements()
